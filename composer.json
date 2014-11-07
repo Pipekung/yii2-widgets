@@ -1,0 +1,12 @@
+{
+    "name": "pipekung/yii2-widgets",
+    "description": "Widgets for Yii2",
+    "authors": [
+        {
+            "name": "Pipekung",
+            "email": "genius.society@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
