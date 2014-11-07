@@ -1,6 +1,7 @@
 {
     "name": "pipekung/yii2-widgets",
     "description": "Widgets for Yii2",
+    "license": "MIT",
     "authors": [
         {
             "name": "Pipekung",
