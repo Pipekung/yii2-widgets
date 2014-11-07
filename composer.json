@@ -9,6 +9,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "kartik-v/yii2-widgets": "*"
     },
     "autoload": {
         "psr-4": {
