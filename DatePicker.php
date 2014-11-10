@@ -2,7 +2,8 @@
 
 namespace pipekung\widgets;
 
-use yii\jui\DatePicker;
+use yii\web\View;
+use pipekung\classes\Common;
 
 /**
  * Description of DatePicker
@@ -24,17 +25,28 @@ class DatePicker extends Widget {
 
         $this->label = $this->model->getAttributeLabel($this->attr);
         $this->clientOptions = array_merge($this->clientOptions, [
+            'changeMonth' => true,
+            'changeYear' => true,
+            'hideIfNoPrevNext' => true,
+            'showButtonPanel' => true,
+            'monthNamesShort' => ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+            'dateFormat' => 'yy-mm-dd',
         ]);
     }
 
     public function run() {
-        DatePicker::widget(['model' => $this->model, 'attribute' => $this->attr, 'clientOptions' => $this->clientOptions]);
+        \yii\jui\DatePicker::widget(['model' => $this->model, 'attribute' => $this->attr, 'clientOptions' => $this->clientOptions]);
         echo $this->form->field($this->model, $this->attr, [
             'addon' => [
                 'prepend' => ['content' => '<i class="glyphicon glyphicon-calendar"></i>'],
                 'groupOptions' => ['class' => 'col-sm-4'],
             ]
         ])->textInput(['readonly' => 'readonly', 'placeholder' => "คลิกเลือก {$this->label}"]);
+        $this->js();
+    }
+
+    public function js() {
+        \Yii::$app->view->registerJs("\$('#". Common::getClassName($this->model) ."-{$this->attr}').datepicker({ dateFormat: '{$this->clientOptions['dateFormat']}' });", View::POS_END);
     }
 
 }
