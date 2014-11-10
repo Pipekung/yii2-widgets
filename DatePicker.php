@@ -19,23 +19,25 @@ class DatePicker extends Widget {
     public $attr;
     public $clientOptions = array();
     protected $label;
+    protected $element;
 
     public function init() {
         parent::init();
 
         $this->label = $this->model->getAttributeLabel($this->attr);
+        $this->element = "#". Common::getClassName($this->model) ."-{$this->attr}";
         $this->clientOptions = array_merge($this->clientOptions, [
             'changeMonth' => true,
             'changeYear' => true,
             'hideIfNoPrevNext' => true,
             'showButtonPanel' => true,
             'monthNamesShort' => ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
-            'dateFormat' => 'yy-mm-dd',
+            'dateFormat' => 'dd-mm-yy',
         ]);
     }
 
     public function run() {
-        \yii\jui\DatePicker::widget(['model' => $this->model, 'attribute' => $this->attr, 'clientOptions' => $this->clientOptions]);
+        \yii\jui\DatePicker::widget(['model' => $this->model, 'attribute' => $this->attr]);
         echo $this->form->field($this->model, $this->attr, [
             'addon' => [
                 'prepend' => ['content' => '<i class="glyphicon glyphicon-calendar"></i>'],
@@ -46,7 +48,8 @@ class DatePicker extends Widget {
     }
 
     public function js() {
-        \Yii::$app->view->registerJs("\$('#". Common::getClassName($this->model) ."-{$this->attr}').datepicker({ dateFormat: '{$this->clientOptions['dateFormat']}' });", View::POS_END);
+        $options = json_encode($this->clientOptions);
+        \Yii::$app->view->registerJs("\$('{$this->element}').datepicker({$options});", View::POS_END);
     }
 
 }
