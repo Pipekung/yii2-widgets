@@ -2,8 +2,6 @@
 
 namespace pipekung\widgets;
 
-use kartik\widgets\Select2;
-
 /**
  * Description of DatePicker
  *
@@ -30,7 +28,7 @@ class Select2 extends Widget {
     }
 
     public function run() {
-        echo $this->form->field($this->model, $this->attr)->widget(Select2::classname(), [
+        echo $this->form->field($this->model, $this->attr)->widget(\kartik\widgets\Select2::classname(), [
             'language' => 'th',
             'data' => $this->data,
             'options' => $this->options,
