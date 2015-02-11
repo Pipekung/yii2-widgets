@@ -24,7 +24,7 @@ class AdminMenu extends Widget {
         echo Html::a('Permission', ['/admin/permission'], ['class' => 'btn btn-outline btn-primary']) . '&nbsp;';
         echo Html::a('Route', ['/admin/route'], ['class' => 'btn btn-outline btn-primary']) . '&nbsp;';
         echo Html::a('Rule', ['/admin/rule'], ['class' => 'btn btn-outline btn-primary']) . '&nbsp;';
-        echo Html::a('Menu', ['/admin/menu'], ['class' => 'btn btn-outline btn-primary']) . '&nbsp;';
+        // echo Html::a('Menu', ['/admin/menu'], ['class' => 'btn btn-outline btn-primary']) . '&nbsp;';
         echo Html::endTag('p');
 
     }
