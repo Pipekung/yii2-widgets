@@ -46,7 +46,7 @@ class TableView extends Widget {
     }
 
     public function run() {
-        $TbHeader = '';
+        $TbHeader = '<th style="width: 20px; text-align: center;">#</th>';
         foreach ($this->column as $val) {
             $headerStyle = isset($val['headerStyle']) ? $val['headerStyle'] : '';
             $TbHeader .= "<th style='{$headerStyle}'>{$val['header']}</th>";
@@ -54,8 +54,10 @@ class TableView extends Widget {
         $TbHeader .= "<th style='{$this->action['headerStyle']}'></th>";
 
         $TbData = '';
+        $i = 0;
         foreach ($this->data as $val) {
             $TbData .= '<tr>';
+            $TbData .= '<td style="text-align: center;">'. ++$i .'</td>';
             if ($this->action['template']['update']['inline']) $TbData .= $this->renderDataWithUpdate($val);
             else $TbData .= $this->renderData($val);
             $TbData .= "<td style='{$this->action['style']}'>{$this->renderButton($val)}</td></tr>";
