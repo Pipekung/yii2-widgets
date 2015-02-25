@@ -4,7 +4,6 @@ namespace pipekung\widgets;
 
 use Yii;
 use yii\web\View;
-use pipekung\classes\Common;
 
 /**
  * Description of DatePicker
@@ -28,13 +27,13 @@ class DatePicker extends Widget {
 
         if (! empty($this->between)) {
             $this->label[0] = $this->model->getAttributeLabel($this->between[0]);
-            $this->element[0] = "#". Common::getClassName($this->model) ."-{$this->between[0]}";
+            $this->element[0] = "#". self::getClassName($this->model) ."-{$this->between[0]}";
 
             $this->label[1] = $this->model->getAttributeLabel($this->between[1]);
-            $this->element[1] = "#". Common::getClassName($this->model) ."-{$this->between[1]}";
+            $this->element[1] = "#". self::getClassName($this->model) ."-{$this->between[1]}";
         } else {
             $this->label[0] = $this->model->getAttributeLabel($this->attr);
-            $this->element[0] = "#". Common::getClassName($this->model) ."-{$this->attr}";
+            $this->element[0] = "#". self::getClassName($this->model) ."-{$this->attr}";
         }
 
         $this->options = array_merge($this->options, [
@@ -89,6 +88,13 @@ class DatePicker extends Widget {
             Yii::$app->view->registerJs("$('{$this->element[0]}').datepicker({$options});", View::POS_END);
             Yii::$app->view->registerJs("$('{$this->element[0]}').datepicker('option', 'onSelect', function() { calculateDate(); });", View::POS_END);
         }
+    }
+
+    public static function getClassName($model) {
+        $model = get_class($model);
+        $model = explode('\\', $model);
+        $model = $model[count($model)-1];
+        return strtolower($model);
     }
 
 }
